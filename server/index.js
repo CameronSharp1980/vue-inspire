@@ -8,7 +8,7 @@ var session = require('./authentication/sessions')
 var Auth = require('./authentication/auth')
 
 //declare routes
-//
+var quoteRoutes = require('./routes/quote-routes')
 //
 //
 
@@ -43,6 +43,7 @@ app.use('/', Auth)
 app.use(Validate)
 // app.use('/api', api) <-- Base api stuff?
 app.use('/', defaultErrorHandler)
+app.use(quoteRoutes)
 
 server.listen(port, () => {
     console.log("Server listening on port: ", port)

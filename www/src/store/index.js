@@ -10,7 +10,7 @@ let api = Axios.create({
 })
 
 let auth = Axios.create({
-    baseURL: window.location.host.includes("localhost") ? 'http://localhost:3000/auth/' : '/auth/',
+    baseURL: window.location.host.includes("localhost") ? 'http://localhost:3000/' : '/',
     timeout: 2000,
     withCredentials: true
 })
@@ -20,10 +20,10 @@ let imageApi = Axios.create({
     timeout: 2000
 })
 
-let quoteApi = Axios.create({
-    baseURL: 'http://quotesondesign.com/api/3.0/api-3.0.json',
-    timeout: 2000
-})
+// let quoteApi = Axios.create({
+//     baseURL: 'http://quotesondesign.com/api/3.0/api-3.0.json',
+//     timeout: 2000
+// })
 
 Vue.use(Vuex)
 
@@ -55,7 +55,7 @@ var store = new Vuex.Store({
         }
     },
     actions: {
-        // AUTH
+        //#region AUTH
         authenticate({ commit, dispatch }) {
             auth('authenticate')
                 .then(res => {
@@ -98,9 +98,11 @@ var store = new Vuex.Store({
                 })
         },
 
+        //#endregion
+
         // CLOCK
 
-        // BACKGROUND IMAGE
+        //#region BACKGROUND IMAGE
         getBackground({ commit, dispatch }) {
             imageApi('')
                 .then(res => {
@@ -109,12 +111,14 @@ var store = new Vuex.Store({
                 })
         },
 
+        //#endregion
+
         // QUOTE
         getQuote({ commit, dispatch }) {
-            quoteApi('')
+            api('quote')
                 .then(res => {
                     console.log(res)
-                    //***START HERE!!! You need to incorporate the bcw getter or find another api */
+                    commit('setQuote', res.data.quote)
                 })
         }
 
