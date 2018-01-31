@@ -9,7 +9,7 @@ var Auth = require('./authentication/auth')
 
 //declare routes
 var quoteRoutes = require('./routes/quote-routes')
-//
+var weatherRoutes = require('./routes/weather-routes')
 //
 
 let app = express()
@@ -43,7 +43,8 @@ app.use('/', Auth)
 app.use(Validate)
 // app.use('/api', api) <-- Base api stuff?
 app.use('/', defaultErrorHandler)
-app.use(quoteRoutes)
+app.use('/api/quote', quoteRoutes)
+app.use('/api/weather', weatherRoutes)
 
 server.listen(port, () => {
     console.log("Server listening on port: ", port)

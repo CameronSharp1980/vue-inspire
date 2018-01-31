@@ -6,12 +6,12 @@ let quoteApi = axios.create({
     timeout: 2000
 })
 
-router.get('/api/quote', (req, res) => {
+router.get('/', (req, res) => {
     quoteApi('')
-        .then(quote => {
-            console.log(quote.data)
+        .then(response => {
+            console.log(response.data)
             // var data = quote.data
-            res.send(quote.data)
+            res.send(response.data)
         })
         .catch(err => res.send(err))
 })

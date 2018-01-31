@@ -32,7 +32,10 @@ var store = new Vuex.Store({
         error: {},
         user: {},
         backgroundPic: 'http://via.placeholder.com/350x150',
-        currentQuote: "Default Quote..."
+        currentQuote: "Default Quote...",
+        weatherData: "No Weather Data",
+        weatherUnit: "&units=imperial",
+        weatherSuffix: "&degF"
     },
     mutations: {
         handleError(state, err) {
@@ -52,6 +55,11 @@ var store = new Vuex.Store({
         // SET QUOTE
         setQuote(state, quote) {
             state.currentQuote = quote;
+        },
+
+        //SET WEATHER
+        setWeather(state, weatherData) {
+            state.weatherData = weatherData
         }
     },
     actions: {
@@ -120,7 +128,19 @@ var store = new Vuex.Store({
                     console.log(res)
                     commit('setQuote', res.data.quote)
                 })
+        },
+
+        //#region WEATHER
+
+        getWeather({ commit, dispatch }, weatherUnit) {
+            api(`weather`, weatherUnit)
+                .then(res => {
+                    console.log(res)
+                    commit('setWeather', res)
+                })
         }
+
+        //#endregion
 
     }
 })

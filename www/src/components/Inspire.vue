@@ -2,6 +2,7 @@
   <div class="inspire">
     <Clock></Clock>
     <Quote></Quote>
+    <Weather></Weather>
     <button @click="logout">Logout</button>
   </div>
 </template>
@@ -9,6 +10,7 @@
 <script>
   import Clock from './Clock'
   import Quote from './Quote'
+  import Weather from './Weather'
   export default {
     name: 'Inspire',
     data() {
@@ -29,7 +31,8 @@
     },
     components: {
       Clock,
-      Quote
+      Quote,
+      Weather
     }
   }
 </script>
