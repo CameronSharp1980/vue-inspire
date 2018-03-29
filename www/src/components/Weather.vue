@@ -1,6 +1,6 @@
 <template>
     <div class="weather" @click="getWeather">
-        {{weatherData}}
+        {{weatherData.data.temp}}
     </div>
 </template>
 

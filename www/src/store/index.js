@@ -33,7 +33,7 @@ var store = new Vuex.Store({
         user: {},
         backgroundPic: 'http://via.placeholder.com/350x150',
         currentQuote: "Default Quote...",
-        weatherData: "No Weather Data",
+        weatherData: { data: { temp: "No Weather Data" } },
         weatherUnit: "&units=imperial",
         weatherSuffix: "&degF"
     },
