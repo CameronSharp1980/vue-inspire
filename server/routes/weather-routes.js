@@ -12,10 +12,11 @@ let weatherApi = axios.create({
 })
 
 router.get('/', (req, res) => {
-    weatherApi('http://api.openweathermap.org/data/2.5/weather?q=boise&units=imperial&APPID=bd82255fd0a21fa1238699b9eda2ee35')
+    console.log("req: ", req)
+    weatherApi(`http://api.openweathermap.org/data/2.5/weather?q=boise${req.query.weatherString}&APPID=bd82255fd0a21fa1238699b9eda2ee35`)
         .then(response => {
             // weatherData = JSON.parse(weatherData)
-            console.log("test: ", response.data.main)
+            // console.log("test: ", response.data.main)
             // var data = quote.data
             res.status(200).send(response.data.main)
         })

@@ -15,16 +15,6 @@ let auth = Axios.create({
     withCredentials: true
 })
 
-let imageApi = Axios.create({
-    baseURL: 'http://www.splashbase.co/api/v1/images/random',
-    timeout: 2000
-})
-
-// let quoteApi = Axios.create({
-//     baseURL: 'http://quotesondesign.com/api/3.0/api-3.0.json',
-//     timeout: 2000
-// })
-
 Vue.use(Vuex)
 
 var store = new Vuex.Store({
@@ -41,14 +31,13 @@ var store = new Vuex.Store({
         weatherData: { data: { temp: "No Weather Data" } },
         weatherUnit: {
             imperial: "&units=imperial",
-            a: "",
-            b: ""
+            metric: "&units=metric"
         },
         weatherSuffix: {
             imperial: "&degF",
-            a: "",
-            b: ""
-        }
+            metric: "&degC"
+        },
+        currentWeatherType: "imperial",
     },
     mutations: {
         handleError(state, err) {
@@ -73,6 +62,10 @@ var store = new Vuex.Store({
         //SET WEATHER
         setWeather(state, weatherData) {
             state.weatherData = weatherData
+        },
+        setWeatherUnit(state) {
+            console.log(state.currentWeatherType)
+            state.currentWeatherType == "imperial" ? state.currentWeatherType = "metric" : state.currentWeatherType = "imperial";
         }
     },
     actions: {
@@ -125,10 +118,10 @@ var store = new Vuex.Store({
 
         //#region BACKGROUND IMAGE
         getBackground({ commit, dispatch }) {
-            imageApi('')
+            api('background')
                 .then(res => {
-                    // console.log(res.data.large_url)
-                    commit('setBackground', res.data.large_url)
+                    console.log("background: ", res)
+                    commit('setBackground', res.data)
                 })
         },
 
@@ -138,19 +131,27 @@ var store = new Vuex.Store({
         getQuote({ commit, dispatch }) {
             api('quote')
                 .then(res => {
-                    console.log(res)
+                    console.log("Quote: ", res)
                     commit('setQuote', res)
                 })
         },
 
         //#region WEATHER
 
-        getWeather({ commit, dispatch }, weatherUnit) {
-            api(`weather`, weatherUnit)
+        getWeather({ commit, dispatch }, weatherString) {
+            api('weather/', {
+                params: {
+                    weatherString: weatherString
+                }
+            })
                 .then(res => {
-                    console.log(res)
+                    console.log("Weather Data: ", res)
                     commit('setWeather', res)
                 })
+        },
+
+        toggleWeatherUnit({ commit, dispatch }) {
+            commit('setWeatherUnit')
         }
 
         //#endregion

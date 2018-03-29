@@ -8,6 +8,7 @@ var session = require('./authentication/sessions')
 var Auth = require('./authentication/auth')
 
 //declare routes
+var backgroundRoutes = require('./routes/background-routes')
 var quoteRoutes = require('./routes/quote-routes')
 var weatherRoutes = require('./routes/weather-routes')
 //
@@ -17,9 +18,8 @@ let server = require('http').createServer(app)
 var port = 3000
 
 function Validate(req, res, next) {
-    // ONLY ALLOW GET METHOD IF NOT LOGGED IN 
     console.log(req.session)
-    if (req.method !== 'GET' && !req.session.uid) {
+    if (!req.session.uid) {
         return res.status(401).send({ error: 'Please Login or Register to continue' })
     }
     return next()
@@ -38,6 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use('*', logger)
 app.use('*', cors(corsOptions))
 app.use('/', Auth)
+app.use('/api/background', backgroundRoutes)
 
 // LOCKS API TO REQUIRE USER AUTH
 app.use(Validate)
@@ -49,3 +50,24 @@ app.use('/api/weather', weatherRoutes)
 server.listen(port, () => {
     console.log("Server listening on port: ", port)
 })
+
+
+
+/*
+
+*** TO DO  ***
+Weather:
+ - Weather Icon
+ - Location
+
+Background:
+ - Refresh Image
+
+Todo List:
+ - 
+
+Hamburger Menu / Music Playlist
+ - 
+
+
+*/

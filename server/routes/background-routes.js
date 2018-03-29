@@ -1,17 +1,15 @@
 var axios = require('axios')
 var router = require('express').Router()
 
-let quoteApi = axios.create({
-    baseURL: 'http://quotesondesign.com/api/3.0/api-3.0.json',
+let backgroundApi = axios.create({
+    baseURL: 'http://www.splashbase.co/api/v1/images/random',
     timeout: 2000
 })
 
 router.get('/', (req, res) => {
-    quoteApi('')
+    backgroundApi('')
         .then(response => {
-            // console.log(response.data)
-            // var data = quote.data
-            res.send(response.data)
+            res.send(response.data.large_url)
         })
         .catch(err => res.send(err))
 })

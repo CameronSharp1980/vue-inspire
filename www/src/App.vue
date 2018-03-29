@@ -45,7 +45,8 @@
     background-position: center;
   }
 
-  body{
-    color: yellow;
+  body {
+    color: #FFFF00;
+    background-color: #000000;
   }
 </style>
