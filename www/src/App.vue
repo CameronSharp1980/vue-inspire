@@ -42,5 +42,10 @@
     min-height: 100vh;
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  body{
+    color: yellow;
   }
 </style>

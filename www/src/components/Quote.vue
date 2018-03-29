@@ -1,6 +1,6 @@
 <template>
     <div class="quote" @click="cycleQuote">
-        {{currentQuote}}
+        <p v-html="currentQuoteData.data.quote">{{currentQuoteData.data.quote}}</p><p>{{currentQuoteData.data.author}}</p>
     </div>
 </template>
 
@@ -21,8 +21,8 @@
             }
         },
         computed: {
-            currentQuote() {
-                return this.$store.state.currentQuote;
+            currentQuoteData() {
+                return this.$store.state.currentQuoteData;
             }
         },
         components: {
