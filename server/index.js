@@ -56,12 +56,15 @@ server.listen(port, () => {
 /*
 
 *** TO DO  ***
+User Model / User Creation:
+ - Eventually add user account control panel
+
 Weather:
- - Weather Icon
- - Location
+ - Formatting
 
 Background:
  - Refresh Image
+ - Formatting
 
 Todo List:
  - 
@@ -69,5 +72,8 @@ Todo List:
 Hamburger Menu / Music Playlist
  - 
 
+Consider:
+ - Drop down menu during user creation with list of viable city names (Need to investigate API City name list, sort by country code?)
+    - http://openweathermap.org/help/city_list.txt
 
 */

@@ -47,6 +47,10 @@
                                     <input class="form-control" type="password" name="password" v-model='register.password' required>
                                 </div>
                                 <div class="form-group">
+                                    <label for="city">City: </label>
+                                    <input class="form-control" type="text" name="city" placeholder="City" v-model='register.city' required>
+                                </div>
+                                <div class="form-group">
                                     <button type="submit">Register</button>
                                 </div>
                             </form>
@@ -76,7 +80,7 @@
                     lastName: '',
                     email: '',
                     password: '',
-
+                    city: ''
                 }
             }
         },

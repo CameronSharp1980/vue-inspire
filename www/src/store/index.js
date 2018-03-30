@@ -28,7 +28,13 @@ var store = new Vuex.Store({
                 quote: "Default Quote"
             }
         },
-        weatherData: { data: { temp: "No Weather Data" } },
+        weatherData: {
+            data:
+                {
+                    main: { temp: "Loading Weather Data" },
+                    weather: [{ icon: '//placehold.it/16x16' }]
+                }
+        },
         weatherUnit: {
             imperial: "&units=imperial",
             metric: "&units=metric"
@@ -45,6 +51,7 @@ var store = new Vuex.Store({
         },
         setUser(state, user) {
             state.user = user
+            // console.log("User: ", state.user)
         },
 
         // BACKGROUND IMAGE
@@ -61,6 +68,8 @@ var store = new Vuex.Store({
 
         //SET WEATHER
         setWeather(state, weatherData) {
+            //http://openweathermap.org/img/w/{{weatherData.data.weather[0].icon}}.png
+            weatherData.data.weather[0].icon = `http://openweathermap.org/img/w/${weatherData.data.weather[0].icon}.png`
             state.weatherData = weatherData
         },
         setWeatherUnit(state) {
@@ -120,7 +129,7 @@ var store = new Vuex.Store({
         getBackground({ commit, dispatch }) {
             api('background')
                 .then(res => {
-                    console.log("background: ", res)
+                    // console.log("background: ", res)
                     commit('setBackground', res.data)
                 })
         },
@@ -131,21 +140,23 @@ var store = new Vuex.Store({
         getQuote({ commit, dispatch }) {
             api('quote')
                 .then(res => {
-                    console.log("Quote: ", res)
+                    // console.log("Quote: ", res)
                     commit('setQuote', res)
                 })
         },
 
         //#region WEATHER
 
-        getWeather({ commit, dispatch }, weatherString) {
+        getWeather({ commit, dispatch }, payload) {
+            // console.log("Payload: ", payload)
             api('weather/', {
                 params: {
-                    weatherString: weatherString
+                    city: `${payload.city}`,
+                    weatherString: `${payload.weatherUnit}`
                 }
             })
                 .then(res => {
-                    console.log("Weather Data: ", res)
+                    // console.log("Weather Data: ", res)
                     commit('setWeather', res)
                 })
         },

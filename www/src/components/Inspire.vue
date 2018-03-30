@@ -1,9 +1,27 @@
 <template>
   <div class="inspire">
-    <Clock></Clock>
-    <Quote></Quote>
-    <Weather></Weather>
-    <button @click="logout">Logout</button>
+    <div class="main-grid">
+      <div class="topmenu-div">
+        <button @click="logout">Logout</button>
+      </div>
+      <div class="data-grid-div">
+        <div class="weather-div">
+          <Weather></Weather>
+        </div>
+        <div class="blank-div"></div>
+        <div class="blank-div"></div>
+        <div class="blank-div"></div>
+        <div class="clock-div">
+          <Clock></Clock>
+        </div>
+        <div class="blank-div"></div>
+        <div class="blank-div"></div>
+        <div class="blank-div"></div>
+        <div class="quote-div">
+          <Quote></Quote>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -39,4 +57,15 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .main-grid {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 50% 50%;
+  }
+
+  .data-grid-div {
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    grid-template-rows: 33.3% 33.3% 33.3%;
+  }
 </style>
